@@ -1,4 +1,4 @@
-package com.example.loan_online.features.loans.domain.models
+package com.example.loan_online.features.create.domain
 
 data class LoanModel(
     val amount: Number,
@@ -14,5 +14,5 @@ data class LoanModel(
     )
 
 enum class LoanState {
-    APPROVED, REGISTRED, REJECTED
+    APPROVED, REGISTERED, REJECTED
 }

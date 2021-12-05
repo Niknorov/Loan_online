@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.example.loan_online.R
 import com.example.loan_online.databinding.FragmentLoginBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,27 +34,35 @@ class LoginFragment : Fragment() {
         ) {
             //progressbar and perehod
             when (it) {
-                LoginUiState.ERROR_INVALID_CREDENCE ->
+                LoginUiState.ERROR_INVALID_CREDENCE -> {
                     Toast.makeText(
                         context,
-                        "Invalid login or password",
+                        getString(R.string.invalid_login_or_password),
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.progressBar.isVisible = false
+                }
 
 
-                LoginUiState.ERROR_EMPTY_INPUT -> Toast.makeText(
-                    context,
-                    "Empty login or password",
-                    Toast.LENGTH_SHORT
-                ).show()
+                LoginUiState.ERROR_EMPTY_INPUT -> {
+                    Toast.makeText(
+                        context,
+                        getString(R.string.empty_login_or_password),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.progressBar.isVisible = false
+                }
 
-                LoginUiState.ERROR_USER_EXIST -> Toast.makeText(
-                    context,
-                    "This user is already exist ", Toast.LENGTH_SHORT
-                ).show()
+                LoginUiState.ERROR_USER_EXIST -> {
+                    Toast.makeText(
+                        context,
+                        getString(R.string.this_user_is_already_exist), Toast.LENGTH_SHORT
+                    ).show()
+                    binding.progressBar.isVisible = false
+                }
 
                 LoginUiState.PROGRESS -> binding.progressBar.isVisible = true
-
+                LoginUiState.SUCCESS -> binding.progressBar.isVisible = false
             }
         }
         val login = binding.login.editText?.text

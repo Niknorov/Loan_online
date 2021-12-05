@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class AuthRequest(
 
-    @SerializedName("Name") val name: String,
-    @SerializedName ("Password")val password: String
+    @SerializedName("name") val name: String,
+    @SerializedName ("password")val password: String
 )

@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".core.MainActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
 
 
         android:id="@+id/my_nav_host_fragment"
         android:name="com.example.loan_online.features.auth.presentation.LoginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,9 @@ plugins {
 android {
     compileSdk 31
 
+    buildFeatures {
+        viewBinding true
+    }
     defaultConfig {
         applicationId "com.example.loan_online"
         minSdk 21
@@ -59,7 +62,7 @@ dependencies {
     kapt "androidx.room:room-compiler:2.3.0"
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
-    implementation"com.squareup.okhttp3:logging-interceptor:4.9.3"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "android.arch.navigation:navigation-fragment:1.0.0"

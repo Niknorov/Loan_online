@@ -5,6 +5,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import com.google.gson.GsonBuilder
+
+import com.google.gson.Gson
 
 
 val networkModule = module {
@@ -13,13 +16,19 @@ val networkModule = module {
 
 }
 
+
 fun provideRetrofit(
     okHttpClient: OkHttpClient
 ): Retrofit {
+
+    val gson = GsonBuilder()
+        .setLenient()
+        .create()
+
     return Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
-        .baseUrl("focusstart.appspot.com")
+        .baseUrl("https://focusstart.appspot.com")
         .build()
 }
 

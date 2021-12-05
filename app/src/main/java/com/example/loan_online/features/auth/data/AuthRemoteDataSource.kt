@@ -3,9 +3,9 @@ package com.example.loan_online.features.auth.data
 class AuthRemoteDataSource(
     private val authApi: AuthApi,
 ) {
-    suspend fun performAuth(authRequest: AuthRequest): String {
+    suspend fun performAuth(authRequest: AuthRequest) {
 
-        return authApi.loginIntoApp(authRequest)
+        authApi.loginIntoApp(authRequest)
     }
 
     suspend fun performRegistration(authRequest: AuthRequest): RegistrationDTO {

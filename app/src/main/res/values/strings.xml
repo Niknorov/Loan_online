@@ -12,9 +12,9 @@
     <string name="amount">Сумма</string>
     <string name="firstName">Имя</string>
     <string name="lastName">Фамилия</string>
-    <string name="percent">Процент: %1$d</string>
+    <string name="percent">Процент: %1$f</string>
     <string name="period">Срок: %1$d</string>
-    <string name="maxAmount">Максимальная сумма: %1$d</string>
+    <string name="maxAmount">Максимальная сумма: %1$f</string>
     <string name="phoneNumber">Номер телефона </string>
     <string name="create">Оформить</string>
 

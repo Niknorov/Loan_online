@@ -9,5 +9,23 @@
         android:id="@+id/loginFragment"
         android:name="com.example.loan_online.features.auth.presentation.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_loansFragment"
+            app:destination="@id/loansFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loansFragment"
+        android:name="com.example.loan_online.features.loans.presentation.LoansFragment"
+        android:label="LoansFragment"
+        tools:layout="@layout/fragment_loans">
+        <action
+            android:id="@+id/action_loansFragment_to_createLoanFragment"
+            app:destination="@id/createLoanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createLoanFragment"
+        android:name="com.example.loan_online.features.create.presentation.CreateLoanFragment"
+        android:label="fragment_create_loan"
+        tools:layout="@layout/fragment_create_loan" />
 </navigation>

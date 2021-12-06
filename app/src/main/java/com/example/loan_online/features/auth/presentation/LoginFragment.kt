@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.loan_online.R
 import com.example.loan_online.databinding.FragmentLoginBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,7 +63,12 @@ class LoginFragment : Fragment() {
                 }
 
                 LoginUiState.PROGRESS -> binding.progressBar.isVisible = true
-                LoginUiState.SUCCESS -> binding.progressBar.isVisible = false
+                LoginUiState.SUCCESS -> {
+                    binding.progressBar.isVisible = false
+                    findNavController().navigate(
+                        R.id.action_loginFragment_to_loansFragment
+                    )
+                }
             }
         }
         val login = binding.login.editText?.text

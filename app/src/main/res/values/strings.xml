@@ -7,5 +7,8 @@
     <string name="invalid_login_or_password">Неверный логин или пароль</string>
     <string name="empty_login_or_password">Пустой логин или пароль</string>
     <string name="this_user_is_already_exist">Этот пользователь уже зарегистрирован</string>
+    <string name="loans_online_title">Займ онлайн</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -7,21 +7,17 @@ class PerformCreationUseCase(
 ) {
 
     suspend operator fun invoke(
-        amount: Number, date: String, firstName: String, id: Int,
-        lastName: String, percent: Number, period: Int, phoneNumber: String,
-        state: LoanState
-    ) {
+        amount: Number, firstName: String,
+        lastName: String, percent: Number, period: Int, phoneNumber: String
+    ): LoanModel {
         return creationRepository.performCreation(
             amount,
-            date,
             firstName,
-            id,
             lastName,
             percent,
             period,
             phoneNumber,
-            state
-        )
+            )
 
     }
 }

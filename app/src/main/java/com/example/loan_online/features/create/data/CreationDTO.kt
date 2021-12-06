@@ -1,7 +1,5 @@
 package com.example.loan_online.features.create.data
 
-import com.example.loan_online.features.create.domain.LoanState
-
 data class CreationDTO(
 
     val amount: Number,
@@ -12,5 +10,5 @@ data class CreationDTO(
     val percent: Number,
     val period: Int,
     val phoneNumber: String,
-    val state: LoanState,
+    val state: String,
 )

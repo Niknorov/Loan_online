@@ -22,7 +22,7 @@
 
             <ImageView
                 android:backgroundTint="@color/white"
-                android:id="@+id/button"
+                android:id="@+id/createButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="end"

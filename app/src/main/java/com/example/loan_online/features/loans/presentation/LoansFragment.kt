@@ -26,7 +26,7 @@ class LoansFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button.setOnClickListener {
+        binding.createButton.setOnClickListener {
             findNavController().navigate(R.id.action_loansFragment_to_createLoanFragment)
         }
 

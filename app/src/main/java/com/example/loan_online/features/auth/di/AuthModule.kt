@@ -3,6 +3,7 @@ package com.example.loan_online.features.auth.di
 import com.example.loan_online.features.auth.data.AuthApi
 import com.example.loan_online.features.auth.data.AuthRemoteDataSource
 import com.example.loan_online.features.auth.data.AuthRepository
+import com.example.loan_online.features.auth.data.TokenLocalDataSource
 import com.example.loan_online.features.auth.domain.usecase.PerformAuthUseCase
 import com.example.loan_online.features.auth.domain.usecase.PerformRegistrationUseCase
 import com.example.loan_online.features.auth.presentation.AuthViewModel
@@ -14,7 +15,8 @@ val authModule = module {
 
     single { createAuthApi(get()) }
     single { AuthRemoteDataSource(get()) }
-    single { AuthRepository(get()) }
+    single { TokenLocalDataSource(get()) }
+    single { AuthRepository(get(), get()) }
     single { PerformAuthUseCase(get()) }
     single { PerformRegistrationUseCase(get()) }
     viewModel { AuthViewModel(get(), get()) }

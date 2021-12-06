@@ -11,7 +11,7 @@ import retrofit2.create
 val creationModule = module {
     single { createCreationApi(get()) }
     single { CreationRemoteDataSource(get()) }
-    single { CreationRepository(get()) }
+    single { CreationRepository(get(), get()) }
     single { PerformCreationUseCase(get()) }
     //viewModel{...}
 }

@@ -1,10 +1,16 @@
 package com.example.loan_online.features.create.data
 
 class CreationRemoteDataSource(
-    private val creationApi: CreationApi,
+    private val creationApi: CreationApi
 ) {
-    suspend fun performCreation(creationRequest: CreationRequest): CreationDTO {
+    suspend fun performCreation(creationRequest: CreationRequest, token: String): CreationDTO {
 
-        return creationApi.createLoan(creationRequest)
+        return creationApi.createLoan(creationRequest, token)
     }
+
+    suspend fun getConditions(token: String): ConditionsDTO {
+
+        return creationApi.getConditions(token)
+    }
+
 }

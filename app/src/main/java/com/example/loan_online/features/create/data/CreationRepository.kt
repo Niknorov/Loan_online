@@ -12,10 +12,10 @@ class CreationRepository(
 ) {
 
     suspend fun performCreation(
-        amount: Number,
+        amount: Double,
         firstName: String,
         lastName: String,
-        percent: Number,
+        percent: Double,
         period: Int,
         phoneNumber: String,
     ): LoanModel {

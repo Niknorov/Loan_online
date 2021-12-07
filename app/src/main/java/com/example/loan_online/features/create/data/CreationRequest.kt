@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 data class CreationRequest
     (
-    @SerializedName("amount") val amount: Number,
+    @SerializedName("amount") val amount: Double,
     @SerializedName("firstName") val firstName: String,
     @SerializedName("lastName") val lastName: String,
-    @SerializedName("percent") val percent: Number,
+    @SerializedName("percent") val percent: Double,
     @SerializedName("period") val period: Int,
     @SerializedName("phoneNumber") val phoneNumber: String,
 

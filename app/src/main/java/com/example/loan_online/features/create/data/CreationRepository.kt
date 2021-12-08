@@ -21,7 +21,7 @@ class CreationRepository(
     ): LoanModel {
 
 
-        val response = creationRemoteDataSource.performCreation(
+        val response = creationRemoteDataSource.createLoan(
             CreationRequest(
                 amount = amount,
                 firstName = firstName,

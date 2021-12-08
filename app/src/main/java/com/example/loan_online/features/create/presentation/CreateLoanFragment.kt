@@ -3,11 +3,10 @@ package com.example.loan_online.features.create.presentation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isEmpty
+import androidx.fragment.app.Fragment
 import com.example.loan_online.R
 import com.example.loan_online.databinding.FragmentCreateLoanBinding
 import com.example.loan_online.databinding.SheetLoanBinding

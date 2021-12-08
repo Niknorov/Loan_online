@@ -1,6 +1,7 @@
-package com.example.loan_online.features.loans.domain.models
+package com.example.loan_online.features.loans.data
 
-data class LoanModel(
+data class LoanDTO(
+
     val amount: Number,
     val date: String,
     val firstName: String,
@@ -9,10 +10,5 @@ data class LoanModel(
     val percent: Number,
     val period: Int,
     val phoneNumber: String,
-    val state: LoanState,
-
-    )
-
-enum class LoanState {
-    APPROVED, REGISTRED, REJECTED
-}
+    val state: String,
+)

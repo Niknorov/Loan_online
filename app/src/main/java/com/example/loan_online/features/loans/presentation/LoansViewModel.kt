@@ -15,9 +15,6 @@ class LoansViewModel(
     private val _loansLiveData = MutableLiveData<List<LoanModel>>()
     val loansLiveData: LiveData<List<LoanModel>> = _loansLiveData
 
-    init {
-        getLoans()
-    }
 
     fun getLoans() {
         viewModelScope.launch {

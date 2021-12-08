@@ -4,6 +4,8 @@ import com.example.loan_online.features.loans.data.LoanRemoteDataSource
 import com.example.loan_online.features.loans.data.LoanRepository
 import com.example.loan_online.features.loans.data.LoansApi
 import com.example.loan_online.features.loans.domain.GetLoansUseCase
+import com.example.loan_online.features.loans.presentation.LoansViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -12,6 +14,7 @@ val loansModule = module {
     single { LoanRemoteDataSource(get()) }
     single { LoanRepository(get(), get()) }
     single { GetLoansUseCase(get()) }
+    viewModel { LoansViewModel(get()) }
 }
 
 fun createLoansApi(retrofit: Retrofit): LoansApi {

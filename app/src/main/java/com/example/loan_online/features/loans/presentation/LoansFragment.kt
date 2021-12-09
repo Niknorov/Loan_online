@@ -39,6 +39,19 @@ class LoansFragment : Fragment() {
 
         binding.loansRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        loansViewModel.loanDataLiveData.observe(viewLifecycleOwner) {
+
+            sheetLoanBinding.phoneNumber.text = it.state.toString()
+            sheetLoanBinding.lastName.text = it.lastName
+            sheetLoanBinding.firstName.text = it.firstName
+            sheetLoanBinding.amount.text = it.amount.toString()
+            sheetLoanBinding.date.text = it.date
+            sheetLoanBinding.percent.text = it.percent.toString()
+            sheetLoanBinding.period.text = it.period.toString()
+            sheetLoanBinding.phoneNumber.text = it.phoneNumber
+        }
+
+
         loansViewModel.loansLiveData.observe(viewLifecycleOwner) {
 
             val adapter = LoansRecyclerAdapter(it)
@@ -50,18 +63,6 @@ class LoansFragment : Fragment() {
                 val dialog = BottomSheetDialog(requireContext())
                 dialog.setContentView(sheetLoanBinding.root)
                 dialog.show()
-
-                loansViewModel.loanDataLiveData.observe(viewLifecycleOwner) {
-
-                    sheetLoanBinding.phoneNumber.text = it.state.toString()
-                    sheetLoanBinding.lastName.text = it.lastName
-                    sheetLoanBinding.firstName.text = it.firstName
-                    sheetLoanBinding.amount.text = it.amount.toString()
-                    sheetLoanBinding.date.text = it.date
-                    sheetLoanBinding.percent.text = it.percent.toString()
-                    sheetLoanBinding.period.text = it.period.toString()
-                    sheetLoanBinding.phoneNumber.text = it.phoneNumber
-                }
 
                 loansViewModel.getLoanData(it.id)
             }

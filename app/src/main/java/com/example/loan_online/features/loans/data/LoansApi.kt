@@ -14,7 +14,7 @@ interface LoansApi {
 
 
     @GET(value = "/loans/{id}")
-    suspend fun getData(
+    suspend fun getLoanData(
         @Header("Authorization") token: String,
         @Path("id") id: Int
     ): LoanDTO

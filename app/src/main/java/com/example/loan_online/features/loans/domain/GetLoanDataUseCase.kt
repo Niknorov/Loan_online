@@ -8,7 +8,7 @@ class GetLoanDataUseCase(
 ) {
     suspend operator fun invoke(id: Int): LoanModel {
 
-        return loanRepository.getData(id)
+        return loanRepository.getLoanData(id)
     }
 
 }

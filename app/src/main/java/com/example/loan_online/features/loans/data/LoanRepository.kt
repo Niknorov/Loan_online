@@ -37,7 +37,7 @@ class LoanRepository(
         return loanList
     }
 
-    suspend fun getData(
+    suspend fun getLoanData(
         id: Int
     ): LoanModel {
 

@@ -12,6 +12,7 @@ import com.example.loan_online.features.create.domain.LoanState
 class LoansRecyclerAdapter(private val loans: List<LoanModel>) :
     RecyclerView.Adapter<LoansRecyclerAdapter.LoanViewHolder>() {
 
+    var onItemClick: ((LoanModel) -> Unit)? = null
 
     inner class LoanViewHolder(private val binding: RecyclerviewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -49,6 +50,9 @@ class LoansRecyclerAdapter(private val loans: List<LoanModel>) :
 
         val loanModel: LoanModel = loans[position]
         holder.bind(loanModel)
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(loans[position])
+        }
 
     }
 

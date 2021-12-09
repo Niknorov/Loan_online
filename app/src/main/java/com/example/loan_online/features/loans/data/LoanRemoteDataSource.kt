@@ -9,4 +9,8 @@ class LoanRemoteDataSource(
         return loansApi.getLoans(token)
     }
 
+    suspend fun getLoanData(token: String, id: Int): LoanDTO {
+
+        return loansApi.getData(token, id)
+    }
 }

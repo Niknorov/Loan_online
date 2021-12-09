@@ -37,4 +37,28 @@ class LoanRepository(
         return loanList
     }
 
+    suspend fun getData(
+        id: Int
+    ): LoanModel {
+
+        val loanData = loanRemoteDataSource.getLoanData(tokenLocalDataSource.getToken(), id)
+
+        return LoanModel(
+            amount = loanData.amount,
+            date = loanData.date,
+            firstName = loanData.firstName,
+            id = loanData.id,
+            lastName = loanData.lastName,
+            percent = loanData.percent,
+            period = loanData.period,
+            phoneNumber = loanData.phoneNumber,
+            state = when (loanData.state) {
+                "APPROVED" -> LoanState.APPROVED
+                "REGISTERED" -> LoanState.REGISTERED
+                "REJECTED" -> LoanState.REJECTED
+                else -> throw IllegalArgumentException()
+            }
+        )
+    }
+
 }

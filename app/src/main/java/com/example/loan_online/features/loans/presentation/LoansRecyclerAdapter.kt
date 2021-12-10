@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.loan_online.R
+import com.example.loan_online.common.formatDate
 import com.example.loan_online.databinding.RecyclerviewItemBinding
 import com.example.loan_online.features.create.domain.LoanModel
 import com.example.loan_online.features.create.domain.LoanState
@@ -19,7 +20,8 @@ class LoansRecyclerAdapter(private val loans: List<LoanModel>) :
 
         fun bind(loanModel: LoanModel) {
 
-            binding.date.text = loanModel.date
+            val date = formatDate(loanModel.date)
+            binding.date.text = date
             if (loanModel.state == LoanState.REGISTERED) {
                 binding.state.text = loanModel.state.toString()
                 binding.state.setTextColor(Color.parseColor("#FCD12A"))
@@ -32,8 +34,8 @@ class LoansRecyclerAdapter(private val loans: List<LoanModel>) :
                 binding.state.text = loanModel.state.toString()
                 binding.state.setTextColor(Color.parseColor("#00A600"))
             }
-            binding.amount.text = loanModel.amount.toString()
-
+            binding.amount.text =
+                binding.root.context.getString(R.string.amountString, loanModel.amount.toString())
         }
 
     }

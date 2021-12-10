@@ -10,12 +10,20 @@
     <string name="loans_online_title">Займ онлайн</string>
     <string name="creation_loan">Оформление займа</string>
     <string name="amount">Сумма</string>
+    <string name="amountString">Сумма: %1$s ₽</string>
+    <string name="stateString">Состояние: %1$s</string>
     <string name="firstName">Имя</string>
+    <string name="firstNameString">Имя: %1$s</string>
     <string name="lastName">Фамилия</string>
+    <string name="lastNameString">Фамилия: %1$s</string>
     <string name="percent">Процент: %1$f</string>
+    <string name="percentString">Процент: %1$s</string>
     <string name="period">Срок: %1$d</string>
-    <string name="maxAmount">Максимальная сумма: %1$f</string>
+    <string name="periodString">Срок: %1$s</string>
+    <string name="maxAmountString">Максимальная сумма: %1$s ₽</string>
     <string name="phoneNumber">Номер телефона </string>
+    <string name="phoneNumberString">Номер телефона: %1$s </string>
+    <string name="date">Дата: %1$s </string>
     <string name="create">Оформить</string>
 
 

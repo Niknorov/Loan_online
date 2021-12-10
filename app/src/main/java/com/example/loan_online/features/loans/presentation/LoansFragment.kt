@@ -1,16 +1,18 @@
 package com.example.loan_online.features.loans.presentation
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.loan_online.R
+import com.example.loan_online.common.formatDate
 import com.example.loan_online.databinding.FragmentLoansBinding
 import com.example.loan_online.databinding.SheetLoanBinding
+import com.example.loan_online.features.create.domain.LoanState
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,6 +33,7 @@ class LoansFragment : Fragment() {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.createButton.setOnClickListener {
@@ -41,14 +44,29 @@ class LoansFragment : Fragment() {
 
         loansViewModel.loanDataLiveData.observe(viewLifecycleOwner) {
 
-            sheetLoanBinding.phoneNumber.text = it.state.toString()
-            sheetLoanBinding.lastName.text = it.lastName
-            sheetLoanBinding.firstName.text = it.firstName
-            sheetLoanBinding.amount.text = it.amount.toString()
-            sheetLoanBinding.date.text = it.date
-            sheetLoanBinding.percent.text = it.percent.toString()
-            sheetLoanBinding.period.text = it.period.toString()
-            sheetLoanBinding.phoneNumber.text = it.phoneNumber
+            if (it.state == LoanState.REGISTERED) {
+                sheetLoanBinding.state.text = getString(R.string.stateString, it.state.toString())
+                sheetLoanBinding.state.setTextColor(Color.parseColor("#FCD12A"))
+
+            } else if (it.state == LoanState.REJECTED) {
+                sheetLoanBinding.state.text = getString(R.string.stateString, it.state.toString())
+                sheetLoanBinding.state.setTextColor(Color.parseColor("#FF2800"))
+
+            } else if (it.state == LoanState.APPROVED) {
+                sheetLoanBinding.state.text = getString(R.string.stateString, it.state.toString())
+                sheetLoanBinding.state.setTextColor(Color.parseColor("#00A600"))
+            }
+
+            sheetLoanBinding.lastName.text = getString(R.string.lastNameString, it.lastName)
+            sheetLoanBinding.firstName.text = getString(R.string.firstNameString, it.firstName)
+            sheetLoanBinding.amount.text = getString(R.string.amountString, it.amount.toString())
+
+            val date = formatDate(it.date)
+            sheetLoanBinding.date.text = getString(R.string.date, date)
+            sheetLoanBinding.percent.text = getString(R.string.percentString, it.percent.toString())
+            sheetLoanBinding.period.text = getString(R.string.periodString, it.period.toString())
+            sheetLoanBinding.phoneNumber.text =
+                getString(R.string.phoneNumberString, it.phoneNumber)
         }
 
 
@@ -68,7 +86,6 @@ class LoansFragment : Fragment() {
             }
         }
         loansViewModel.getLoans()
-
 
     }
 }

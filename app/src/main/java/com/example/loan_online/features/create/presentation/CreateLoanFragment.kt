@@ -1,5 +1,6 @@
 package com.example.loan_online.features.create.presentation
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,11 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.loan_online.R
+import com.example.loan_online.common.format
+import com.example.loan_online.common.formatDate
 import com.example.loan_online.databinding.FragmentCreateLoanBinding
 import com.example.loan_online.databinding.SheetLoanBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class CreateLoanFragment : Fragment() {
     private lateinit var sheetLoanBinding: SheetLoanBinding
@@ -81,8 +83,9 @@ class CreateLoanFragment : Fragment() {
         viewModel.conditionsLiveData.observe(
             viewLifecycleOwner
         ) {
-            binding.maxAmount.text = getString(R.string.maxAmount, it.maxAmount)
-            binding.percent.text = getString(R.string.percent, it.percent)
+
+            binding.maxAmount.text = getString(R.string.maxAmountString, it.maxAmount.format(2))
+            binding.percent.text = getString(R.string.percentString, it.percent.format(2))
             binding.period.text = getString(R.string.period, it.period)
         }
 
@@ -169,16 +172,19 @@ class CreateLoanFragment : Fragment() {
             val dialog = BottomSheetDialog(requireContext())
             dialog.setContentView(sheetLoanBinding.root)
             dialog.show()
-            sheetLoanBinding.state.text = it.state.toString()
-            sheetLoanBinding.lastName.text = it.lastName
-            sheetLoanBinding.firstName.text = it.firstName
-            sheetLoanBinding.amount.text = it.amount.toString()
-            sheetLoanBinding.date.text = it.date
-            sheetLoanBinding.percent.text = it.percent.toString()
-            sheetLoanBinding.period.text = it.period.toString()
-            sheetLoanBinding.phoneNumber.text = it.phoneNumber
-        }
+            sheetLoanBinding.state.text = getString(R.string.stateString, it.state.toString())
+            sheetLoanBinding.state.setTextColor(Color.parseColor("#FCD12A"))
+            sheetLoanBinding.lastName.text = getString(R.string.lastNameString, it.lastName)
+            sheetLoanBinding.firstName.text = getString(R.string.firstNameString, it.firstName)
+            sheetLoanBinding.amount.text = getString(R.string.amountString, it.amount.toString())
 
+            val date = formatDate(it.date)
+            sheetLoanBinding.date.text = getString(R.string.date, date)
+            sheetLoanBinding.percent.text = getString(R.string.percentString, it.percent.toString())
+            sheetLoanBinding.period.text = getString(R.string.periodString, it.period.toString())
+            sheetLoanBinding.phoneNumber.text =
+                getString(R.string.phoneNumberString, it.phoneNumber)
+        }
 
     }
 

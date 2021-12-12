@@ -6,6 +6,7 @@ import com.example.loan_online.core.di.networkModule
 import com.example.loan_online.features.auth.di.authModule
 import com.example.loan_online.features.create.di.creationModule
 import com.example.loan_online.features.loans.di.loansModule
+import com.example.loan_online.features.splash.di.splashModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -21,6 +22,7 @@ class App : Application() {
                 authModule,
                 creationModule,
                 loansModule,
+                splashModule,
             )
         }
     }

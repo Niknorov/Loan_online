@@ -33,7 +33,7 @@ class LoginFragment : Fragment() {
         viewModel.uISateLivedata.observe(
             viewLifecycleOwner
         ) {
-            //progressbar and perehod
+
             when (it) {
                 LoginUiState.ERROR_INVALID_CREDENCE -> {
                     Toast.makeText(
@@ -41,6 +41,11 @@ class LoginFragment : Fragment() {
                         getString(R.string.invalid_login_or_password),
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.progressBar.isVisible = false
+                }
+                LoginUiState.ERROR_NETWORK -> {
+
+                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                     binding.progressBar.isVisible = false
                 }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,45 +45,71 @@ class LoansFragment : Fragment() {
 
         loansViewModel.loanDataLiveData.observe(viewLifecycleOwner) {
 
-            if (it.state == LoanState.REGISTERED) {
-                sheetLoanBinding.state.text = getString(R.string.stateString, it.state.toString())
-                sheetLoanBinding.state.setTextColor(Color.parseColor("#FCD12A"))
+            when (it) {
+                is SuccessLoanDataState -> {
 
-            } else if (it.state == LoanState.REJECTED) {
-                sheetLoanBinding.state.text = getString(R.string.stateString, it.state.toString())
-                sheetLoanBinding.state.setTextColor(Color.parseColor("#FF2800"))
+                    if (it.model.state == LoanState.REGISTERED) {
+                        sheetLoanBinding.state.text =
+                            getString(R.string.stateString, it.model.state.toString())
+                        sheetLoanBinding.state.setTextColor(Color.parseColor("#FCD12A"))
 
-            } else if (it.state == LoanState.APPROVED) {
-                sheetLoanBinding.state.text = getString(R.string.stateString, it.state.toString())
-                sheetLoanBinding.state.setTextColor(Color.parseColor("#00A600"))
+                    } else if (it.model.state == LoanState.REJECTED) {
+                        sheetLoanBinding.state.text =
+                            getString(R.string.stateString, it.model.state.toString())
+                        sheetLoanBinding.state.setTextColor(Color.parseColor("#FF2800"))
+
+                    } else if (it.model.state == LoanState.APPROVED) {
+                        sheetLoanBinding.state.text =
+                            getString(R.string.stateString, it.model.state.toString())
+                        sheetLoanBinding.state.setTextColor(Color.parseColor("#00A600"))
+                    }
+
+                    sheetLoanBinding.lastName.text =
+                        getString(R.string.lastNameString, it.model.lastName)
+                    sheetLoanBinding.firstName.text =
+                        getString(R.string.firstNameString, it.model.firstName)
+                    sheetLoanBinding.amount.text =
+                        getString(R.string.amountString, it.model.amount.toString())
+
+                    val date = formatDate(it.model.date)
+                    sheetLoanBinding.date.text = getString(R.string.date, date)
+                    sheetLoanBinding.percent.text =
+                        getString(R.string.percentString, it.model.percent.toString())
+                    sheetLoanBinding.period.text =
+                        getString(R.string.periodString, it.model.period.toString())
+                    sheetLoanBinding.phoneNumber.text =
+                        getString(R.string.phoneNumberString, it.model.phoneNumber)
+                }
+                is LoansDataErrorNetwork -> {
+                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
+                }
             }
 
-            sheetLoanBinding.lastName.text = getString(R.string.lastNameString, it.lastName)
-            sheetLoanBinding.firstName.text = getString(R.string.firstNameString, it.firstName)
-            sheetLoanBinding.amount.text = getString(R.string.amountString, it.amount.toString())
 
-            val date = formatDate(it.date)
-            sheetLoanBinding.date.text = getString(R.string.date, date)
-            sheetLoanBinding.percent.text = getString(R.string.percentString, it.percent.toString())
-            sheetLoanBinding.period.text = getString(R.string.periodString, it.period.toString())
-            sheetLoanBinding.phoneNumber.text =
-                getString(R.string.phoneNumberString, it.phoneNumber)
         }
 
 
         loansViewModel.loansLiveData.observe(viewLifecycleOwner) {
 
-            val adapter = LoansRecyclerAdapter(it)
-            binding.loansRecyclerView.adapter = adapter
-            adapter.onItemClick = {
+            when (it) {
+                is SuccessLoansState -> {
 
-                sheetLoanBinding = SheetLoanBinding.inflate(layoutInflater)
+                    val adapter = LoansRecyclerAdapter(it.models)
+                    binding.loansRecyclerView.adapter = adapter
+                    adapter.onItemClick = {
 
-                val dialog = BottomSheetDialog(requireContext())
-                dialog.setContentView(sheetLoanBinding.root)
-                dialog.show()
+                        sheetLoanBinding = SheetLoanBinding.inflate(layoutInflater)
 
-                loansViewModel.getLoanData(it.id)
+                        val dialog = BottomSheetDialog(requireContext())
+                        dialog.setContentView(sheetLoanBinding.root)
+                        dialog.show()
+
+                        loansViewModel.getLoanData(it.id)
+                    }
+                }
+                is LoansErrorNetwork -> {
+                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
+                }
             }
         }
         loansViewModel.getLoans()

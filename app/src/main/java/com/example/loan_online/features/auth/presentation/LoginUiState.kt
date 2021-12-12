@@ -6,5 +6,7 @@ enum class LoginUiState {
     SUCCESS,
     ERROR_INVALID_CREDENCE,
     ERROR_EMPTY_INPUT,
-    ERROR_USER_EXIST
+    ERROR_USER_EXIST,
+    ERROR_NETWORK
+
 }

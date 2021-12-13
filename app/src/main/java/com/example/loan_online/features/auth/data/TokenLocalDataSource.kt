@@ -16,4 +16,9 @@ class TokenLocalDataSource(context: Context) {
 
         return sharedPreferences.getString("token", "").orEmpty()
     }
+
+    fun clearToken() {
+
+        return sharedPreferences.edit { clear() }
+    }
 }

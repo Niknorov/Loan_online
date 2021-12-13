@@ -24,7 +24,7 @@
                 android:layout_height="56dp"
                 android:minHeight="?attr/actionBarSize"
                 app:title="@string/creation_loan"
-                app:titleTextColor="@color/white">
+                app:titleTextColor="@color/black">
 
             </androidx.appcompat.widget.Toolbar>
 

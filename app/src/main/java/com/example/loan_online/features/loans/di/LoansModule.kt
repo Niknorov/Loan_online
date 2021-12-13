@@ -3,6 +3,7 @@ package com.example.loan_online.features.loans.di
 import com.example.loan_online.features.loans.data.LoanRemoteDataSource
 import com.example.loan_online.features.loans.data.LoanRepository
 import com.example.loan_online.features.loans.data.LoansApi
+import com.example.loan_online.features.loans.domain.ClearTokenUseCase
 import com.example.loan_online.features.loans.domain.GetLoanDataUseCase
 import com.example.loan_online.features.loans.domain.GetLoansUseCase
 import com.example.loan_online.features.loans.presentation.LoansViewModel
@@ -16,7 +17,8 @@ val loansModule = module {
     single { LoanRepository(get(), get()) }
     single { GetLoansUseCase(get()) }
     single { GetLoanDataUseCase(get()) }
-    viewModel { LoansViewModel(get(), get()) }
+    single { ClearTokenUseCase(get()) }
+    viewModel { LoansViewModel(get(), get(), get()) }
 }
 
 fun createLoansApi(retrofit: Retrofit): LoansApi {

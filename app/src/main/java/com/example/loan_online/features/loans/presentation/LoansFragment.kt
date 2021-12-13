@@ -2,9 +2,7 @@ package com.example.loan_online.features.loans.presentation
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -30,15 +28,37 @@ class LoansFragment : Fragment() {
     ): View? {
 
         binding = FragmentLoansBinding.inflate(layoutInflater)
-        return binding.root
 
+        return binding.root
     }
 
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+
+
+        R.id.createButton -> {
+            findNavController().navigate(R.id.action_loansFragment_to_createLoanFragment)
+            true
+        }
+        R.id.exitButton -> {
+            loansViewModel.onExit()
+            findNavController().navigate(R.id.action_loansFragment_to_loginFragment)
+            true
+
+        }
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.createButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loansFragment_to_createLoanFragment)
+
+        binding.toolbar.inflateMenu(R.menu.menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            onOptionsItemSelected(it)
+
         }
 
         binding.loansRecyclerView.layoutManager = LinearLayoutManager(context)

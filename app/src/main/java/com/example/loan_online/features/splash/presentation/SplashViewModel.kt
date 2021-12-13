@@ -3,9 +3,7 @@ package com.example.loan_online.features.splash.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.loan_online.features.splash.domain.GetTokenUseCase
-import kotlinx.coroutines.launch
+import com.example.loan_online.features.auth.domain.usecase.GetTokenUseCase
 
 class SplashViewModel(
     private val getTokenUseCase: GetTokenUseCase

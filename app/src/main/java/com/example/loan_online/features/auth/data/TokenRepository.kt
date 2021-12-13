@@ -1,4 +1,4 @@
-package com.example.loan_online.features.splash.data
+package com.example.loan_online.features.auth.data
 
 import com.example.loan_online.features.auth.data.TokenLocalDataSource
 
@@ -8,6 +8,10 @@ class TokenRepository(
 
     fun getToken(): String {
         return tokenLocalDataSource.getToken()
+    }
+
+    fun clearToken() {
+        return tokenLocalDataSource.clearToken()
     }
 
 }

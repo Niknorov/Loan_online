@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.loan_online.features.loans.domain.ClearTokenUseCase
 import com.example.loan_online.features.loans.domain.GetLoanDataUseCase
 import com.example.loan_online.features.loans.domain.GetLoansUseCase
 import kotlinx.coroutines.launch
@@ -12,7 +13,8 @@ import java.net.UnknownHostException
 
 class LoansViewModel(
     private val getLoansUseCase: GetLoansUseCase,
-    private val getLoanDataUseCase: GetLoanDataUseCase
+    private val getLoanDataUseCase: GetLoanDataUseCase,
+    private val clearTokenUseCase: ClearTokenUseCase
 ) : ViewModel() {
 
     private val _loansLiveData = MutableLiveData<LoansUiState>()
@@ -45,5 +47,9 @@ class LoansViewModel(
             }
 
         }
+    }
+
+    fun onExit() {
+        clearTokenUseCase()
     }
 }

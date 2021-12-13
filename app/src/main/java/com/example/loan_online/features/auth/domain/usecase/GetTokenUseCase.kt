@@ -1,6 +1,6 @@
-package com.example.loan_online.features.splash.domain
+package com.example.loan_online.features.auth.domain.usecase
 
-import com.example.loan_online.features.splash.data.TokenRepository
+import com.example.loan_online.features.auth.data.TokenRepository
 
 class GetTokenUseCase(
     private val tokenRepository: TokenRepository

@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_loansFragment_to_createLoanFragment"
             app:destination="@id/createLoanFragment" />
+        <action
+            android:id="@+id/action_loansFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/createLoanFragment"

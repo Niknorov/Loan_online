@@ -3,38 +3,75 @@ package com.example.loan_online.features.loans.data
 import com.example.loan_online.features.auth.data.TokenLocalDataSource
 import com.example.loan_online.features.create.domain.LoanModel
 import com.example.loan_online.features.create.domain.LoanState
+import java.lang.Exception
 import java.lang.IllegalArgumentException
 
 class LoanRepository(
     private val loanRemoteDataSource: LoanRemoteDataSource,
-    private val tokenLocalDataSource: TokenLocalDataSource
+    private val tokenLocalDataSource: TokenLocalDataSource,
+    private val loanLocalDataSource: LoanLocalDataSource
 ) {
 
     suspend fun getLoans(): List<LoanModel> {
+        try {
+            val loanEntityList =
+                loanRemoteDataSource.getLoans(tokenLocalDataSource.getToken()).map {
 
-
-        val loanList = loanRemoteDataSource.getLoans(tokenLocalDataSource.getToken()).map {
-
-            LoanModel(
-                amount = it.amount,
-                date = it.date,
-                firstName = it.firstName,
-                id = it.id,
-                lastName = it.lastName,
-                percent = it.percent,
-                period = it.period,
-                phoneNumber = it.phoneNumber,
-                state = when (it.state) {
-                    "APPROVED" -> LoanState.APPROVED
-                    "REGISTERED" -> LoanState.REGISTERED
-                    "REJECTED" -> LoanState.REJECTED
-                    else -> throw IllegalArgumentException()
+                    LoanEntity(
+                        amount = it.amount,
+                        date = it.date,
+                        firstName = it.firstName,
+                        id = it.id,
+                        lastName = it.lastName,
+                        percent = it.percent,
+                        period = it.period,
+                        phoneNumber = it.phoneNumber,
+                        state = it.state
+                    )
                 }
 
-            )
+            loanLocalDataSource.insertLoan(loanEntityList)
+            return loanEntityList.map {
+                LoanModel(
+                    it.amount,
+                    it.date,
+                    it.firstName,
+                    it.id,
+                    it.lastName,
+                    it.percent,
+                    it.period,
+                    it.phoneNumber,
+                    state = when (it.state) {
+                        "APPROVED" -> LoanState.APPROVED
+                        "REGISTERED" -> LoanState.REGISTERED
+                        "REJECTED" -> LoanState.REJECTED
+                        else -> throw IllegalArgumentException()
+                    }
+                )
+            }
+
+        } catch (e: Exception) {
+            return loanLocalDataSource.getLoan().map {
+                LoanModel(
+                    it.amount,
+                    it.date,
+                    it.firstName,
+                    it.id,
+                    it.lastName,
+                    it.percent,
+                    it.period,
+                    it.phoneNumber,
+                    state = when (it.state) {
+                        "APPROVED" -> LoanState.APPROVED
+                        "REGISTERED" -> LoanState.REGISTERED
+                        "REJECTED" -> LoanState.REJECTED
+                        else -> throw IllegalArgumentException()
+                    }
+                )
+            }
 
         }
-        return loanList
+        
     }
 
     suspend fun getLoanData(

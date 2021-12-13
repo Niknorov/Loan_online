@@ -1,8 +1,7 @@
 package com.example.loan_online.features.loans.di
 
-import com.example.loan_online.features.loans.data.LoanRemoteDataSource
-import com.example.loan_online.features.loans.data.LoanRepository
-import com.example.loan_online.features.loans.data.LoansApi
+import com.example.loan_online.core.AppDataBase
+import com.example.loan_online.features.loans.data.*
 import com.example.loan_online.features.loans.domain.ClearTokenUseCase
 import com.example.loan_online.features.loans.domain.GetLoanDataUseCase
 import com.example.loan_online.features.loans.domain.GetLoansUseCase
@@ -13,8 +12,10 @@ import retrofit2.Retrofit
 
 val loansModule = module {
     single { createLoansApi(get()) }
+    single { createLoanDao(get()) }
     single { LoanRemoteDataSource(get()) }
-    single { LoanRepository(get(), get()) }
+    single { LoanLocalDataSource(get()) }
+    single { LoanRepository(get(), get(), get()) }
     single { GetLoansUseCase(get()) }
     single { GetLoanDataUseCase(get()) }
     single { ClearTokenUseCase(get()) }
@@ -24,4 +25,9 @@ val loansModule = module {
 fun createLoansApi(retrofit: Retrofit): LoansApi {
 
     return retrofit.create(LoansApi::class.java)
+}
+
+fun createLoanDao(dataBase: AppDataBase): LoanDao {
+
+    return dataBase.createLoanDao()
 }

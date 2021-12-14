@@ -1,6 +1,5 @@
 package com.example.loan_online.features.create.data
 
-import com.example.loan_online.features.create.domain.LoanState
 import com.google.gson.annotations.SerializedName
 
 data class CreationRequest

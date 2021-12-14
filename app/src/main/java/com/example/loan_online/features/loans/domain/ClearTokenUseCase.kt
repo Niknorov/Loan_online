@@ -1,6 +1,6 @@
 package com.example.loan_online.features.loans.domain
 
-import com.example.loan_online.features.auth.data.TokenRepository
+import com.example.loan_online.features.auth.domain.repository.TokenRepository
 
 class ClearTokenUseCase(
     private val tokenRepository: TokenRepository

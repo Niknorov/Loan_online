@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.loan_online.R
 import com.example.loan_online.common.format
@@ -71,7 +72,7 @@ class CreateLoanFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentCreateLoanBinding.inflate(layoutInflater)
         return binding.root
@@ -83,10 +84,21 @@ class CreateLoanFragment : Fragment() {
         viewModel.conditionsLiveData.observe(
             viewLifecycleOwner
         ) {
+            when (it) {
+                is LoanConditionsUiState -> {
+                    binding.maxAmount.text =
+                        getString(R.string.maxAmountString, it.model.maxAmount.format(2))
+                    binding.percent.text =
+                        getString(R.string.percentString, it.model.percent.format(2))
+                    binding.period.text = getString(R.string.period, it.model.period)
 
-            binding.maxAmount.text = getString(R.string.maxAmountString, it.maxAmount.format(2))
-            binding.percent.text = getString(R.string.percentString, it.percent.format(2))
-            binding.period.text = getString(R.string.period, it.period)
+                }
+                is CreateLoanErrorNetwork -> {
+                    Toast.makeText(context, R.string.networkExceptionCreateLoan, Toast.LENGTH_SHORT)
+                        .show()
+                    binding.createButton.isEnabled = false
+                }
+            }
         }
 
         binding.createButton.setOnClickListener {
@@ -139,10 +151,17 @@ class CreateLoanFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 hideError()
-                if (binding.amount.editText?.text?.isNotBlank() == true && binding.amount.editText?.text?.toString()
-                        ?.toDouble()!! > viewModel.conditionsLiveData.value?.maxAmount!!
-                ) {
-                    binding.amount.error = "Сумма не должна превышать допустимую"
+                if (viewModel.conditionsLiveData.value is LoanConditionsUiState) {
+
+                    val loanCreateLoanUiState =
+                        viewModel.conditionsLiveData.value as LoanConditionsUiState
+
+                    if (binding.amount.editText?.text?.isNotBlank() == true && binding.amount.editText?.text?.toString()
+                            ?.toDouble()!! > loanCreateLoanUiState.model.maxAmount
+                    ) {
+                        binding.amount.error = "Сумма не должна превышать допустимую"
+                    }
+
                 }
 
             }

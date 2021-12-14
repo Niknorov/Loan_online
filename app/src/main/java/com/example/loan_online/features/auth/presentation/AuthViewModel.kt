@@ -1,11 +1,13 @@
 package com.example.loan_online.features.auth.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loan_online.features.auth.domain.usecase.PerformAuthUseCase
 import com.example.loan_online.features.auth.domain.usecase.PerformRegistrationUseCase
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
@@ -19,10 +21,13 @@ class AuthViewModel(
     private val _uIStateLiveData = MutableLiveData<LoginUiState>()
     val uISateLivedata: LiveData<LoginUiState> = _uIStateLiveData
 
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        handleLoadingError(throwable)
+    }
 
     fun launchAuth(login: String, password: String) {
         if (login.isNotBlank() && password.isNotBlank()) {
-            viewModelScope.launch {
+            viewModelScope.launch(exceptionHandler) {
                 try {
                     _uIStateLiveData.postValue(LoginUiState.PROGRESS)
 
@@ -47,7 +52,7 @@ class AuthViewModel(
 
     fun launchRegistration(login: String, password: String) {
         if (login.isNotBlank() && password.isNotBlank()) {
-            viewModelScope.launch {
+            viewModelScope.launch(exceptionHandler) {
                 try {
                     _uIStateLiveData.postValue(LoginUiState.PROGRESS)
 
@@ -69,5 +74,9 @@ class AuthViewModel(
         } else {
             _uIStateLiveData.postValue(LoginUiState.ERROR_EMPTY_INPUT)
         }
+    }
+
+    private fun handleLoadingError(error: Throwable) {
+        Log.e("LoansViewModel", "Failed to load loan", error)
     }
 }

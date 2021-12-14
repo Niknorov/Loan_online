@@ -1,7 +1,5 @@
 package com.example.loan_online.features.create.domain
 
-import com.example.loan_online.features.create.data.CreationRepository
-
 class CreateLoanUseCase(
     private val creationRepository: CreationRepository
 ) {

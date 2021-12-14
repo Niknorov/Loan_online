@@ -7,16 +7,15 @@ import androidx.room.PrimaryKey
 data class LoanEntity(
 
     @PrimaryKey
-    var amount: Number,
+    var id: Int,
+    var amount: Double,
     var date: String,
     var firstName: String,
-    var id: Int,
     var lastName: String,
-    var percent: Number,
+    var percent: Double,
     var period: Int,
     var phoneNumber: String,
     var state: String,
-
-    )
+)
 
 

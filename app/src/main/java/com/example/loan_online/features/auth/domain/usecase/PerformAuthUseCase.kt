@@ -1,7 +1,6 @@
 package com.example.loan_online.features.auth.domain.usecase
 
-import com.example.loan_online.features.auth.data.AuthRepository
-import com.example.loan_online.features.auth.data.AuthRequest
+import com.example.loan_online.features.auth.domain.repository.AuthRepository
 
 class PerformAuthUseCase(
     private val authRepository: AuthRepository

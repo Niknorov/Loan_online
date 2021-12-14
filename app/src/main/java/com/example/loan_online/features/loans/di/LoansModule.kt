@@ -5,6 +5,7 @@ import com.example.loan_online.features.loans.data.*
 import com.example.loan_online.features.loans.domain.ClearTokenUseCase
 import com.example.loan_online.features.loans.domain.GetLoanDataUseCase
 import com.example.loan_online.features.loans.domain.GetLoansUseCase
+import com.example.loan_online.features.loans.domain.LoanRepository
 import com.example.loan_online.features.loans.presentation.LoansViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -15,7 +16,7 @@ val loansModule = module {
     single { createLoanDao(get()) }
     single { LoanRemoteDataSource(get()) }
     single { LoanLocalDataSource(get()) }
-    single { LoanRepository(get(), get(), get()) }
+    single<LoanRepository> { return@single LoanRepositoryImpl(get(), get(), get()) }
     single { GetLoansUseCase(get()) }
     single { GetLoanDataUseCase(get()) }
     single { ClearTokenUseCase(get()) }

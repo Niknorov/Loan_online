@@ -19,7 +19,5 @@ class SplashViewModel(
         } else {
             _splashLiveData.postValue(SplashState.GOTOLOANS)
         }
-
-
     }
 }

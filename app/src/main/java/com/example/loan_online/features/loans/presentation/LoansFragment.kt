@@ -25,7 +25,7 @@ class LoansFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentLoansBinding.inflate(layoutInflater)
 
@@ -36,7 +36,7 @@ class LoansFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
 
-        R.id.createButton -> {
+        R.id.createButtonMenu -> {
             findNavController().navigate(R.id.action_loansFragment_to_createLoanFragment)
             true
         }

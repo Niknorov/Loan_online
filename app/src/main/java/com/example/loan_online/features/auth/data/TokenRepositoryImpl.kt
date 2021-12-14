@@ -1,16 +1,16 @@
 package com.example.loan_online.features.auth.data
 
-import com.example.loan_online.features.auth.data.TokenLocalDataSource
+import com.example.loan_online.features.auth.domain.repository.TokenRepository
 
-class TokenRepository(
+class TokenRepositoryImpl(
     private val tokenLocalDataSource: TokenLocalDataSource
-) {
+) : TokenRepository {
 
-    fun getToken(): String {
+    override fun getToken(): String {
         return tokenLocalDataSource.getToken()
     }
 
-    fun clearToken() {
+    override fun clearToken() {
         return tokenLocalDataSource.clearToken()
     }
 

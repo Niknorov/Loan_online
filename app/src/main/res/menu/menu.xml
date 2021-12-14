@@ -6,7 +6,7 @@
 
 
     <item
-        android:id="@+id/createButton"
+        android:id="@+id/createButtonMenu"
         android:title="@string/createLoan" />
     <item
         android:id="@+id/exitButton"

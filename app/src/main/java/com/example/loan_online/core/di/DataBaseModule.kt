@@ -11,5 +11,7 @@ val databaseModule = module {
 
 }
 
-private fun provideDataBase(context: Context) =
-    Room.databaseBuilder(context, AppDataBase::class.java, "loan_database").build()
+private fun provideDataBase(context: Context): AppDataBase {
+    return Room.databaseBuilder(context, AppDataBase::class.java, "loan_database")
+        .build()
+}

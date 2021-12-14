@@ -2,16 +2,17 @@ package com.example.loan_online.features.create.data
 
 import com.example.loan_online.features.auth.data.TokenLocalDataSource
 import com.example.loan_online.features.create.domain.ConditionsModel
+import com.example.loan_online.features.create.domain.CreationRepository
 import com.example.loan_online.features.create.domain.LoanModel
 import com.example.loan_online.features.create.domain.LoanState
 import java.lang.IllegalArgumentException
 
-class CreationRepository(
+class CreationRepositoryImpl(
     private val creationRemoteDataSource: CreationRemoteDataSource,
     private val tokenLocalDataSource: TokenLocalDataSource
-) {
+) : CreationRepository {
 
-    suspend fun performCreation(
+    override suspend fun performCreation(
         amount: Double,
         firstName: String,
         lastName: String,
@@ -50,7 +51,7 @@ class CreationRepository(
         )
     }
 
-    suspend fun getConditions(): ConditionsModel {
+    override suspend fun getConditions(): ConditionsModel {
         val response = creationRemoteDataSource.getConditions(tokenLocalDataSource.getToken())
         return ConditionsModel(
             maxAmount = response.maxAmount,

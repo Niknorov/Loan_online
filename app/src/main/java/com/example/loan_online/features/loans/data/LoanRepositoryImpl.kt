@@ -3,16 +3,17 @@ package com.example.loan_online.features.loans.data
 import com.example.loan_online.features.auth.data.TokenLocalDataSource
 import com.example.loan_online.features.create.domain.LoanModel
 import com.example.loan_online.features.create.domain.LoanState
+import com.example.loan_online.features.loans.domain.LoanRepository
 import java.lang.Exception
 import java.lang.IllegalArgumentException
 
-class LoanRepository(
+class LoanRepositoryImpl(
     private val loanRemoteDataSource: LoanRemoteDataSource,
     private val tokenLocalDataSource: TokenLocalDataSource,
     private val loanLocalDataSource: LoanLocalDataSource
-) {
+) : LoanRepository {
 
-    suspend fun getLoans(): List<LoanModel> {
+    override suspend fun getLoans(): List<LoanModel> {
         try {
             val loanEntityList =
                 loanRemoteDataSource.getLoans(tokenLocalDataSource.getToken()).map {
@@ -71,10 +72,9 @@ class LoanRepository(
             }
 
         }
-        
     }
 
-    suspend fun getLoanData(
+    override suspend fun getLoanData(
         id: Int
     ): LoanModel {
 
@@ -97,5 +97,4 @@ class LoanRepository(
             }
         )
     }
-
 }
